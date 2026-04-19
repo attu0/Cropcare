@@ -10,7 +10,7 @@ class SerialControl(Node):
     def __init__(self):
         super().__init__('serial_control')
 
-        self.ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        self.ser = serial.Serial('/dev/ttyACM0', 57600, timeout=1)
         self.get_logger().info("Connected to rover")
 
         thread = threading.Thread(target=self.keyboard_loop)
