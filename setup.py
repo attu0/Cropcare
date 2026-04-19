@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+from glob import glob
+import os
 
 package_name = 'Cropcare'
 
@@ -10,8 +12,13 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
     ],
-    install_requires=['setuptools'],
+    install_requires=[
+        'setuptools',
+        'pyserial',
+        'pynput',
+    ],
     zip_safe=True,
     maintainer='atharv',
     maintainer_email='atharvmudse@gmail.com',
@@ -25,6 +32,8 @@ setup(
     entry_points={
         'console_scripts': [
             'teleop_serial = Cropcare.teleop_serial:main',
+            'cmd_vel_serial = Cropcare.cmd_vel_serial:main',
+            'wasd_teleop = Cropcare.wasd_teleop:main',
         ],
     },
 )
